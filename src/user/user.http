@@ -5,22 +5,32 @@ content-type: application/json
 {
   "username": "jake",
   "password": "jake1234",
-  "email": "jake@gamil.com"
+  "email": "jake@test.com"
 }
 
 ### GetUser ❷ 유저 정보 찾기 
-GET http://localhost:3000/user/getUser/jake@gamil.com
+GET http://localhost:3000/user/getUser/jake@test.com
 
 
 ### Update User ❸ 유저 정보 업데이트 
-PUT http://localhost:3000/user/update/jake@gamil.com
+PUT http://localhost:3000/user/update/jake@test.com
 content-type: application/json
 
 {
-  "email": "jake@gamil.com",
+  "email": "jake@test.com",
   "username": "jake2",
   "password": "jake12345"
 }
 
 ### Delete User  ❹ 유저 삭제 
-DELETE http://localhost:3000/user/delete/jake@gamil.com
+DELETE http://localhost:3000/user/delete/jake@test.com
+
+### 잘못된 이메일을 입력한 경우 
+POST http://localhost:3000/user/create
+content-type: application/json
+
+{
+  "username": "jake2",
+  "password": "jake12345",
+  "email": "jake-test"
+}
