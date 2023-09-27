@@ -3,9 +3,9 @@ POST http://localhost:3000/user/create
 content-type: application/json
 
 {
-  "username": "jake",
-  "password": "jake1234",
-  "email": "jake@test.com"
+  "username": "kyung",
+  "password": "1234",
+  "email": "jake@test1.com"
 }
 
 ### GetUser ❷ 유저 정보 찾기 
