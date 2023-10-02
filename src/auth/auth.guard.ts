@@ -1,5 +1,6 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { AuthGuard } from '@nestjs/passport';
 
 @Injectable()
 export class LoginGuard implements CanActivate {
@@ -30,3 +31,26 @@ export class LoginGuard implements CanActivate {
     }
 }
 
+@Injectable()
+export class LocalAuthGuard extends AuthGuard('local') {
+    async canActivate(context: any): Promise<boolean> {
+        console.log('guard before canActivate');
+        const result = (await super.canActivate(context)) as boolean;
+        console.log('result : ' + result);
+        console.log('guard after canActivate');
+        const request = context.switchToHttp().getRequest();
+        console.log(request.session);
+        await super.logIn(request);
+        console.log(request.session);
+        return result;
+  }
+}
+
+
+@Injectable()
+export class AuthenticatedGuard implements CanActivate {
+    canActivate(context: ExecutionContext): boolean {
+        const request = context.switchToHttp().getRequest();
+        return request.isAuthenticated();
+    }
+}
